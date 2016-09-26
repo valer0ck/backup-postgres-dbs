@@ -29,6 +29,12 @@ To check size limit type:
 postconf | grep message_size_limit
 ```
 
+Then:
+
+```
+sudo service postfix restart 
+```
+
 ### Code
 
 If you are testing at localhost,  postgres_host='localhost' other case postgres_host=''
