@@ -11,6 +11,7 @@ Sending email from server require to install
 ```
 sudo apt-get install postfix
 sudo apt-get install mutt
+sudo apt install mailutils
 ```
 
 [mutt], command line email client. Mutt allows you to send attachments
@@ -32,15 +33,35 @@ postconf | grep message_size_limit
 Then:
 
 ```
-sudo service postfix restart 
+sudo service postfix restart
 ```
+
+### Adding cronjob
+
+Open crontab list with
+
+```
+ crontab -e
+```
+
+Then add your cronjob:
+
+```
+0 2 * * * /bin/sh /home/backup_folder/backup.sh >> /home/django/backup/log.log 2>&1
+```
+
+Cronjob will be executed everyday at 2:00 am. There is also created a logfile in backup folder
 
 ### Code
 
-If you are testing at localhost,  postgres_host='localhost' other case postgres_host=''
+If you are testing at localhost, postgres_host='localhost' other case postgres_host=''
 
 You also need to update:
 postgres_password, postgres_username and to email (hi@elementalab.com)
+
+### Mysql
+
+There where added a script to generate mysql backup similar to postgres backup
 
 
 [mutt]: <http://www.mutt.org/>
